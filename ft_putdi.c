@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:34:47 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 16:09:55 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 17:03:24 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,32 +90,11 @@ static char	*space_create(char *ret, t_fl *unit)
 	return (space);
 }
 
-int	ft_putdi(t_fl *unit, int n)
+int	ft_putdi2(char *to_print, t_fl *unit, int n)
 {
-	char	*to_print;
 	char	*space;
 	char	*ret;
-	int		dot_ori;
 
-	dot_ori = unit->dot;
-	if (unit->dot == 0 && unit->flag_0 == 1)
-	{
-		unit->dot = 1;
-		unit->dot_nbr = unit->width;
-		if (n < 0 || unit->plus == 1 || unit->space == 1)
-			unit->dot_nbr -= 1;
-	}
-	// if (n == 0 && unit->dot == 0)
-	if (dot_ori == 0 && n == 0)
-	{
-		to_print = malloc(2);
-		if (to_print == 0)
-			return (-1);
-		to_print[0] = '0';
-		to_print[1] = 0;
-	}
-	else
-		to_print = str_nbr_create(n, 0, 0);
 	if (to_print == 0)
 		return (-1);
 	to_print = str_zero_space_sign_add(to_print, unit, n);
@@ -126,6 +105,36 @@ int	ft_putdi(t_fl *unit, int n)
 		ret = ft_strjoin(to_print, space);
 	else
 		ret = ft_strjoin(space, to_print);
+	free(to_print);
+	free(space);
+	if (ret == 0)
+		return (-1);
 	n = write(1, ret, ft_strlen(ret));
-	return (free(to_print), free(space), free(ret), n);
+	return (free(ret), n);
+}
+
+int	ft_putdi(t_fl *unit, int n)
+{
+	char	*to_print;
+	int		dot_ori;
+
+	dot_ori = unit->dot;
+	if (unit->dot == 0 && unit->flag_0 == 1)
+	{
+		unit->dot = 1;
+		unit->dot_nbr = unit->width;
+		if (n < 0 || unit->plus == 1 || unit->space == 1)
+			unit->dot_nbr -= 1;
+	}
+	if (dot_ori == 0 && n == 0)
+	{
+		to_print = malloc(2);
+		if (to_print == 0)
+			return (-1);
+		to_print[0] = '0';
+		to_print[1] = 0;
+	}
+	else
+		to_print = str_nbr_create(n, 0, 0);
+	return (ft_putdi2(to_print, unit, n));
 }

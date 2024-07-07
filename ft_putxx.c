@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:03:37 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 16:37:10 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 17:09:12 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_n(unsigned int n)
 	return (n + 'A' - 10);
 }
 
-static char	*str_nbr_create(unsigned int n, t_fl *unit)
+char	*str_nbr_createxx(unsigned int n, t_fl *unit)
 {
 	char	*ret;
 	char	*temp;
@@ -47,14 +47,11 @@ static char	*str_nbr_create(unsigned int n, t_fl *unit)
 	return (ret);
 }
 
-
-static char	*str_zero_space_sign_add(char *ret, t_fl *unit, unsigned int n, int dot_ori)
+static char	*str_zero_space_sign_add(char *ret, t_fl *unit,
+		int dot_ori, int cnt)
 {
 	char	*temp;
-	int		cnt;
 
-	// (void) dot_ori;
-	(void) n;
 	cnt = (int) ft_strlen(ret);
 	if (unit->prefix == 1 && dot_ori != 1)
 		cnt += 2;
@@ -102,35 +99,15 @@ static char	*space_create(char *ret, t_fl *unit)
 	return (space);
 }
 
-int	ft_putxx(t_fl *unit, unsigned int n)
+int	ft_putxx2(t_fl *unit, char *to_print, int dot_ori)
 {
-	char	*to_print;
-	char	*space;
-	char	*ret;
 	int		ret_nbr;
-	int		dot_ori;
+	char	*ret;
+	char	*space;
 
-	if (n == 0)
-		unit->prefix = 0;
-	dot_ori = unit->dot;
-	if (unit->dot == 0 && unit->flag_0 == 1)
-	{
-		unit->dot = 1;
-		unit->dot_nbr = unit->width;
-	}
-	if (dot_ori == 0 && n == 0)
-	{
-		to_print = malloc(2);
-		if (to_print == 0)
-			return (-1);
-		to_print[0] = '0';
-		to_print[1] = 0;
-	}
-	else
-		to_print = str_nbr_create(n, unit);
 	if (to_print == 0)
 		return (-1);
-	to_print = str_zero_space_sign_add(to_print, unit, n, dot_ori);
+	to_print = str_zero_space_sign_add(to_print, unit, dot_ori, 0);
 	if (to_print != 0)
 		space = space_create(to_print, unit);
 	if (to_print == 0 || space == 0)
@@ -139,6 +116,8 @@ int	ft_putxx(t_fl *unit, unsigned int n)
 		ret = ft_strjoin(to_print, space);
 	else
 		ret = ft_strjoin(space, to_print);
+	if (ret == 0)
+		return (free(to_print), free(space), -1);
 	ret_nbr = write(1, ret, ft_strlen(ret));
 	return (free(to_print), free(space), free(ret), ret_nbr);
 }

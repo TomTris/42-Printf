@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:33:24 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 16:03:34 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 17:04:23 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,27 +61,6 @@ int	ft_decide2(char **str, t_fl *unit, int *char_skip)
 {
 	int	i;
 
-	while (**str == '#' || **str == '+' || **str == '-' || **str == '0' || **str == ' ')
-	{
-		if (**str == '#')
-			unit->prefix = 1;
-		else if (**str == '+')
-			unit->plus = 1;
-		else if (**str == '-')
-			unit->minus = 1;
-		else if (**str == ' ')
-			unit->space = 1;
-		else if (**str == '0')
-			unit->flag_0 = 1;
-		(*char_skip)++;
-		(*str)++;
-	}
-	// if (**str == '0')
-	// {
-	// 	unit->flag_0 = 1;
-	// 	(*char_skip)++;
-	// 	(*str)++;
-	// }
 	if (dot_search(*str) == 1)
 		unit->dot = 1;
 	if (ft_is_man(*str) != 1)

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:15:43 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 14:57:11 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 16:56:05 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,15 @@ int		ft_putc(t_fl *unit, char c);
 int		ft_putdi(t_fl *unit, int n);
 int		ft_puts(t_fl *unit, char *s);
 int		ft_putu(t_fl *unit, unsigned int n);
+
 int		ft_putx(t_fl *unit, unsigned int n);
+int		ft_putx2(t_fl *unit, char *to_print, int dot_ori);
+char	*str_nbr_createx(unsigned int n, t_fl *unit);
+
 int		ft_putxx(t_fl *unit, unsigned int n);
+int		ft_putxx2(t_fl *unit, char *to_print, int dot_ori);
+char	*str_nbr_createxx(unsigned int n, t_fl *unit);
+
 char	*ft_strjoin_char(char const *s1, char const s2);
 size_t	ft_strlen(const char *a);
 char	*ft_strjoin_char_before(char const *s1, char const s2);

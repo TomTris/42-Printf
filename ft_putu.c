@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:26 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 16:10:57 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 17:00:55 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,11 @@ static char	*str_nbr_create(unsigned int n)
 	return (ret);
 }
 
-static char	*str_zero_space_sign_add(char *ret, t_fl *unit, unsigned int n)
+static char	*str_zero_space_sign_add(char *ret, t_fl *unit)
 {
 	char	*temp;
 	int		cnt;
 
-	(void) n;
 	cnt = (int) ft_strlen(ret);
 	while (cnt++ < unit->dot_nbr)
 	{
@@ -82,11 +81,29 @@ static char	*space_create(char *ret, t_fl *unit)
 	return (space);
 }
 
+int	ft_putu2(char *to_print, t_fl *unit)
+{
+	char	*space;
+	char	*ret;
+	int		ret_nbr;
+
+	if (to_print == 0)
+		return (-1);
+	to_print = str_zero_space_sign_add(to_print, unit);
+	space = space_create(to_print, unit);
+	if (unit->minus == 1)
+		ret = ft_strjoin(to_print, space);
+	else
+		ret = ft_strjoin(space, to_print);
+	if (ret == 0)
+		return (free(to_print), free(space), -1);
+	ret_nbr = write(1, ret, ft_strlen(ret));
+	return (free(to_print), free(space), free(ret), ret_nbr);
+}
+
 int	ft_putu(t_fl *unit, unsigned int n)
 {
 	char	*to_print;
-	char	*space;
-	char	*ret;
 	int		dot_ori;
 
 	dot_ori = unit->dot;
@@ -97,7 +114,6 @@ int	ft_putu(t_fl *unit, unsigned int n)
 		if (unit->plus == 1 || unit->space == 1)
 			unit->dot_nbr -= 1;
 	}
-	// if (n == 0 && unit->dot == 0)
 	if (dot_ori == 0 && n == 0)
 	{
 		to_print = malloc(2);
@@ -108,14 +124,5 @@ int	ft_putu(t_fl *unit, unsigned int n)
 	}
 	else
 		to_print = str_nbr_create(n);
-	if (to_print == 0)
-		return (-1);
-	to_print = str_zero_space_sign_add(to_print, unit, n);
-	space = space_create(to_print, unit);
-	if (unit->minus == 1)
-		ret = ft_strjoin(to_print, space);
-	else
-		ret = ft_strjoin(space, to_print);
-	n = write(1, ret, ft_strlen(ret));
-	return (free(to_print), free(space), free(ret), n);
+	return (ft_putu2(to_print, unit));
 }
