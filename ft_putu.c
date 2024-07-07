@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:26 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 14:31:31 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 16:10:57 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,18 @@ int	ft_putu(t_fl *unit, unsigned int n)
 	char	*to_print;
 	char	*space;
 	char	*ret;
+	int		dot_ori;
 
+	dot_ori = unit->dot;
 	if (unit->dot == 0 && unit->flag_0 == 1)
 	{
 		unit->dot = 1;
 		unit->dot_nbr = unit->width;
-		if (n < 0 || unit->plus == 1 || unit->space == 1)
+		if (unit->plus == 1 || unit->space == 1)
 			unit->dot_nbr -= 1;
 	}
-	if (n == 0 && unit->dot == 0)
+	// if (n == 0 && unit->dot == 0)
+	if (dot_ori == 0 && n == 0)
 	{
 		to_print = malloc(2);
 		if (to_print == 0)

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:03:37 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 15:28:06 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 16:37:10 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,17 @@ static char	*str_nbr_create(unsigned int n, t_fl *unit)
 	return (ret);
 }
 
-static char	*str_zero_space_sign_add(char *ret, t_fl *unit, unsigned int n)
+
+static char	*str_zero_space_sign_add(char *ret, t_fl *unit, unsigned int n, int dot_ori)
 {
 	char	*temp;
 	int		cnt;
 
+	// (void) dot_ori;
 	(void) n;
 	cnt = (int) ft_strlen(ret);
+	if (unit->prefix == 1 && dot_ori != 1)
+		cnt += 2;
 	while (cnt++ < unit->dot_nbr)
 	{
 		temp = ret;
@@ -104,20 +108,29 @@ int	ft_putxx(t_fl *unit, unsigned int n)
 	char	*space;
 	char	*ret;
 	int		ret_nbr;
+	int		dot_ori;
 
 	if (n == 0)
 		unit->prefix = 0;
+	dot_ori = unit->dot;
 	if (unit->dot == 0 && unit->flag_0 == 1)
 	{
 		unit->dot = 1;
 		unit->dot_nbr = unit->width;
-		if (unit->plus == 1 || unit->space == 1)
-			unit->dot_nbr -= 1;
 	}
-	to_print = str_nbr_create(n, unit);
+	if (dot_ori == 0 && n == 0)
+	{
+		to_print = malloc(2);
+		if (to_print == 0)
+			return (-1);
+		to_print[0] = '0';
+		to_print[1] = 0;
+	}
+	else
+		to_print = str_nbr_create(n, unit);
 	if (to_print == 0)
 		return (-1);
-	to_print = str_zero_space_sign_add(to_print, unit, n);
+	to_print = str_zero_space_sign_add(to_print, unit, n, dot_ori);
 	if (to_print != 0)
 		space = space_create(to_print, unit);
 	if (to_print == 0 || space == 0)

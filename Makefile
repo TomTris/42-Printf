@@ -8,11 +8,11 @@ SRC =  ft_libft.c ft_libft2.c\
 
 OBJS = $(SRC:.c=.o)
 
-$(NAME): $(OBJS)
-	cc -o $(NAME) $(OBJS)
-
 # $(NAME): $(OBJS)
-# 	@ar rcs $(NAME) $(OBJS)
+# 	cc -o $(NAME) $(OBJS)
+
+$(NAME): $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 all: $(NAME)
 
