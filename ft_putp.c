@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:23:00 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 12:51:29 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 17:18:20 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char	*space_create(char *ret, t_fl *unit)
 	i = (int) ft_strlen(ret);
 	space = malloc(1);
 	if (space == 0)
-		return (free(ret), NULL);
+		return (NULL);
 	space[0] = 0;
 	while (i++ < unit->width)
 	{
@@ -81,7 +81,7 @@ static char	*space_create(char *ret, t_fl *unit)
 		space = ft_strjoin_char_before(space, ' ');
 		free(temp);
 		if (space == 0)
-			return (free(ret), NULL);
+			return (NULL);
 	}
 	return (space);
 }
@@ -97,13 +97,18 @@ int	ft_putp(t_fl *unit, unsigned long n)
 	if (to_print == 0)
 		return (-1);
 	to_print = str_zero_space_sign_add(to_print, unit, n);
-	space = space_create(to_print, unit);
+	if (to_print != 0)
+		space = space_create(to_print, unit);
+	if (to_print == 0 || space == 0)
+		return (free(to_print), -1);
 	if (unit->minus == 1)
 		ret = ft_strjoin(to_print, space);
 	else
 		ret = ft_strjoin(space, to_print);
 	free(to_print);
 	free(space);
+	if (ret == 0)
+		return (-1);
 	ret_nbr = write(1, ret, ft_strlen(ret));
 	free(ret);
 	return (ret_nbr);

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:56:17 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 17:08:44 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 17:19:04 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static char	*space_create(char *ret, t_fl *unit)
 	i = (int) ft_strlen(ret);
 	space = malloc(1);
 	if (space == 0)
-		return (free(ret), NULL);
+		return (NULL);
 	space[0] = 0;
 	while (i++ < unit->width)
 	{
@@ -94,7 +94,7 @@ static char	*space_create(char *ret, t_fl *unit)
 		space = ft_strjoin_char_before(space, ' ');
 		free(temp);
 		if (space == 0)
-			return (free(ret), NULL);
+			return (NULL);
 	}
 	return (space);
 }
