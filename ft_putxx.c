@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:03:37 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 14:59:16 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 15:28:06 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static char	*str_zero_space_sign_add(char *ret, t_fl *unit, unsigned int n)
 	if (unit->prefix == 1)
 	{
 		temp = ret;
-		ret = ft_strjoin_char_before(ret, 'x');
+		ret = ft_strjoin_char_before(ret, 'X');
 		free(temp);
 		if (ret == 0)
 			return (ret);

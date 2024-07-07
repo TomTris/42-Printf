@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:34:29 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 15:24:05 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 15:31:41 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // printf("--{%c}\n", d);
 int	ft_putc2(t_fl *unit, int cnt, int i)
 {
-	if (unit->plus == 0)
+	if (unit->minus != 0)
 	{
 		while (i-- > 1)
 		{
@@ -34,7 +34,7 @@ int	ft_putc(t_fl *unit, char d)
 
 	cnt = 0;
 	i = unit->width;
-	if (unit->plus == 1)
+	if (unit->minus == 0)
 	{
 		while (i-- > 1)
 		{

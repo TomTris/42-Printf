@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:23:31 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 15:23:38 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 15:30:36 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ int	ft_printf(const char *str_o, ...)
 int	main(void)
 {
 
-	printf("{%d}\n", printf("{%c}", 0));
-	printf("{%d}\n", ft_printf("{%c}", 0));
+	printf("{%d}\n", printf("{%5%}"));
+	printf("{%d}\n", ft_printf("{%5%}"));
 }
