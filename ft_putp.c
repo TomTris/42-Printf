@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:23:00 by qdo               #+#    #+#             */
-/*   Updated: 2024/03/14 15:35:20 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 11:48:13 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,75 @@ static int	ft_n(unsigned long n)
 	return (n - 10 + 'a');
 }
 
-static int	ft_write_ptr1(unsigned long n, int cnt)
+static char	*str_nbr_create(unsigned int n)
 {
-	char	a;
+	char	*ret;
 
-	if (cnt == -1)
-		return (-1);
-	if (n >= 16)
-		cnt = ft_write_ptr1(n / 16, cnt + 1);
-	if (cnt < 0)
-		return (-1);
-	n = n % 16;
-	a = ft_n(n);
-	if (write(1, &a, 1) < 0)
-		return (-1);
-	return (cnt);
+	ret = malloc(1);
+	if (ret == 0)
+		return (NULL);
+	ret[0] = 0;
+	while (n != 0)
+	{
+		ret = ft_strjoin_char_before(ret, ft_n(n % 16));
+		if (ret == 0)
+			return (NULL);
+		n = n / 10;
+	}
+	return (ret);
 }
 
-int	ft_putp(unsigned long n)
+static char	*str_zero_space_sign_add(char *ret, fl_t *unit, unsigned int n)
 {
-	int	cnt;
+	char	*temp;
+	int		cnt;
 
-	cnt = 2;
-	if (write(1, "0x", 2) < 0)
-		return (-1);
-	return (ft_write_ptr1(n, cnt + 1));
+	temp = ret;
+	ret = n
+	return (ret);
 }
-// int	main(void)
-// {
-// 	int a = 234223;
-// 	int *b = &a;
 
-// 	printf("\n%d\n",ft_ptr1((unsigned long)b));
-// 	printf("%p\n", b);
-// }
+static char	*space_create(char *ret, fl_t *unit)
+{
+	int		i;
+	char	*space;
+	char	*temp;
+
+	i = (int) ft_strlen(ret);
+	space = malloc(1);
+	if (space == 0)
+		return (free(ret), NULL);
+	space[0] = 0;
+	while (i++ < unit->width)
+	{
+		temp = space;
+		space = ft_strjoin_char_before(space, ' ');
+		free(temp);
+		if (space == 0)
+			return (free(ret), NULL);
+	}
+	return (space);
+}
+
+int	ft_putp(fl_t *unit, unsigned int n)
+{
+	char	*to_print;
+	char	*space;
+	char	*ret;
+	int		ret_nbr;
+
+	to_print = str_nbr_create(n);
+	if (to_print == 0)
+		return (-1);
+	to_print = str_zero_space_sign_add(to_print, unit, n);
+	space = space_create(to_print, unit);
+	if (unit->minus == 1)
+		ret = ft_strjoin(to_print, space);
+	else
+		ret = ft_strjoin(space, to_print);
+	free(to_print);
+	free(space);
+	ret_nbr = write(1, ret, ft_strlen(ret));
+	free(ret);
+	return (n);
+}

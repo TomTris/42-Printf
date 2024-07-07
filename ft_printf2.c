@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:33:24 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 10:42:43 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 11:33:23 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,23 @@
 
 int	ft_cmp(char *str, fl_t *unit, va_list args)
 {
-	// printf("{%c}\n", *str);
 	if (*str == '%')
 		return (ft_putc(unit, '%'));
 	else if (*str == 'c')
 		return (ft_putc(unit, va_arg(args, int)));
-	// else if (*str == 'p')
-	// 	return (ft_putp(unit, va_arg(args, unsigned long)));
-	// else if (*str == 's')
-	// 	return (ft_puts(unit, va_arg(args, char *)));
 	else if (*str == 'd' || *str == 'i')
 		return (ft_putdi(unit, va_arg(args, int)));
-	// else if (*str == 'u')
-	// 	return (ft_putu(unit, va_arg(args, unsigned int)));
-	// else if (*str == 'x')
-	// 	return (ft_putx(unit, va_arg(args, unsigned int)));
-	// else if (*str == 'X')
-	// 	return (ft_putxx(unit, va_arg(args, unsigned int)));
-	// else
+	else if (*str == 'p')
+		return (-1);
+	else if (*str == 's')
+		return (-1);
+	else if (*str == 'u')
+		return (-1);
+	else if (*str == 'x')
+		return (-1);
+	else if (*str == 'X')
+		return (-1);
+	else
 		return (-1);
 }
 
@@ -42,7 +41,7 @@ int	ft_exec(char *str, fl_t *unit, va_list args)
 
 int	dot_nbr_def(char *str, fl_t *unit)
 {
-	int	i;
+	int		i;
 	char	*dot_nbr;
 
 	unit->dot = 1;

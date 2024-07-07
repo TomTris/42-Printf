@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:35:22 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/06 20:35:53 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 11:26:08 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 int	ft_is_man(char *c)
 {
 	if (*c == 'c' || *c == 'p' || *c == 's' || *c == 'd'
-		|| *c == 'u' || *c == 'x' || *c == 'X')
+		|| *c == 'u' || *c == 'x' || *c == 'X' || *c == '%')
 		return (1);
 	return (0);
 }
 
 void	ft_strncpy(char *src, char *dest, int size)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (i < size)
 	{
 		dest[i] = src[i];
@@ -44,7 +45,7 @@ int	dot_search(char *str)
 
 int	wid_def(char *str, fl_t *unit)
 {
-	int	i;
+	int		i;
 	char	*width;
 
 	i = 0;

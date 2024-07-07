@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:23:31 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 10:44:14 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 11:47:54 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ int ft_printf3(char *str, int *char_skip, va_list args)
 			str++;
 			(*char_skip)++;
 		}
-		return (ft_decide(str, &unit, char_skip, args));
 	}
-	return (-1);
+	return (ft_decide(str, &unit, char_skip, args));
 }
 
 int	ft_printf2(char *str, int cnt, va_list args)
@@ -70,7 +69,11 @@ int	ft_printf(const char *str_o, ...)
 	va_end(args);
 	return (cnt);
 }
+
 int	main(void)
 {
-	ft_printf("%    #+-21.0d\n", 123);
+	// ft_printf("%%", 0);
+	char a;
+
+	printf("%+p\n", &a);
 }

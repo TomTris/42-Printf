@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr1.c                                       :+:      :+:    :+:   */
+/*   ft_puts.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:51:38 by qdo               #+#    #+#             */
-/*   Updated: 2024/03/14 15:35:34 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 11:40:29 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ static int	ft_putstr1_null(void)
 		return (6);
 }
 
-int	ft_puts(char *s)
+int	ft_puts(fl_t *unit, char *s)
 {
 	int		len;
 	int		len2;
 	int		i;
 	char	*s1;
 
+	(void) unit;
 	if (s == NULL)
 	{
 		return (ft_putstr1_null());
