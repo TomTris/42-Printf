@@ -8,11 +8,11 @@ ft_putp.c ft_puts.c ft_putu.c ft_putx.c ft_putxx.c
 
 OBJS = $(SRC:.c=.o)
 
-# $(NAME): $(OBJS)
-# 	cc -o $(NAME) $(OBJS)
-
 $(NAME): $(OBJS)
-	@ar rcs $(NAME) $(OBJS)
+	cc -o $(NAME) $(OBJS)
+
+# $(NAME): $(OBJS)
+# 	@ar rcs $(NAME) $(OBJS)
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:33:24 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 13:27:21 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 13:43:45 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,18 @@ int	ft_decide2(char **str, t_fl *unit, int *char_skip)
 		(*char_skip)++;
 		(*str)++;
 	}
-	if (dot_search((*str)) == 1)
+	if (ft_is_man(*str) != 1)
 	{
 		i = 0;
 		if (wid_def((*str), unit) == -1)
 			return (-1);
-		while ((*str)[i] != '.')
+		while ((*str)[i] != '.' && ft_is_man((*str) + i) != 1)
 			i++;
-		(*char_skip) += i + 1;
-		(*str) += i + 1;
-	}	
+		if ((*str)[i] == '.')
+			i++;
+		(*char_skip) += i;
+		(*str) += i;
+	}
 	return (1);
 }
 

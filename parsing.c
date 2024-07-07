@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:35:22 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 13:26:46 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 13:35:50 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ int	wid_def(char *str, t_fl *unit)
 
 	i = 0;
 	unit->dot = 1;
-	while (str[i] != '.')
+	while (str[i] != '.' && ft_is_man(str + i) != 1)
 		i++;
 	width = malloc(i + 1);
-	width[i] = 0;
 	if (width == 0)
 		return (-1);
 	ft_strncpy(str, width, i);
+	width[i] = 0;
 	unit->width = ft_atoi(width);
 	free(width);
 	return (1);
