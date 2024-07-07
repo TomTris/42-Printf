@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:33:24 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/06 21:15:08 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 10:42:43 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_cmp(char *str, fl_t *unit, va_list args)
 {
-	printf("{%c}\n", *str);
+	// printf("{%c}\n", *str);
 	if (*str == '%')
 		return (ft_putc(unit, '%'));
 	else if (*str == 'c')
@@ -23,8 +23,8 @@ int	ft_cmp(char *str, fl_t *unit, va_list args)
 	// 	return (ft_putp(unit, va_arg(args, unsigned long)));
 	// else if (*str == 's')
 	// 	return (ft_puts(unit, va_arg(args, char *)));
-	// else if (*str == 'd' || *str == 'i')
-	// 	return (ft_putdi(unit, va_arg(args, int)));
+	else if (*str == 'd' || *str == 'i')
+		return (ft_putdi(unit, va_arg(args, int)));
 	// else if (*str == 'u')
 	// 	return (ft_putu(unit, va_arg(args, unsigned int)));
 	// else if (*str == 'x')
@@ -53,6 +53,7 @@ int	dot_nbr_def(char *str, fl_t *unit)
 	if (dot_nbr == 0)
 		return (-1);
 	ft_strncpy(str, dot_nbr, i);
+	dot_nbr[i] = 0;
 	unit->dot_nbr = ft_atoi(dot_nbr);
 	free(dot_nbr);
 	return (1);

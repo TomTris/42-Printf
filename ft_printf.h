@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:15:43 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/06 21:44:31 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 10:31:03 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,7 @@ int		ft_putx(fl_t *unit, unsigned int n);
 int		ft_putxx(fl_t *unit, unsigned int n);
 char	*ft_strjoin_char(char const *s1, char const s2);
 size_t	ft_strlen(const char *a);
+char	*ft_strjoin_char_before(char const *s1, char const s2);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strcpy(char *s1, char *s2);
 #endif
