@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:03:37 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 12:48:30 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 13:05:14 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,21 @@ static int	ft_n(unsigned int n)
 {
 	if (n <= 9)
 		return (n + '0');
-	return (n + 'A'  - 10);
+	return (n + 'A' - 10);
 }
 
-static char	*str_nbr_create(unsigned int n)
+static char	*str_nbr_create(unsigned int n, t_fl *unit)
 {
 	char	*ret;
 	char	*temp;
 
+	if (n == 0 && unit->dot == 0)
+	{
+		ret = malloc(2);
+		if (ret == 0)
+			return (NULL);
+		return (ret[0] = '0', ret[1] = 0, ret);
+	}
 	ret = malloc(1);
 	if (ret == 0)
 		return (NULL);
@@ -40,7 +47,7 @@ static char	*str_nbr_create(unsigned int n)
 	return (ret);
 }
 
-static char	*str_zero_space_sign_add(char *ret, fl_t *unit, unsigned int n)
+static char	*str_zero_space_sign_add(char *ret, t_fl *unit, unsigned int n)
 {
 	char	*temp;
 	int		cnt;
@@ -69,7 +76,7 @@ static char	*str_zero_space_sign_add(char *ret, fl_t *unit, unsigned int n)
 	return (ret);
 }
 
-static char	*space_create(char *ret, fl_t *unit)
+static char	*space_create(char *ret, t_fl *unit)
 {
 	int		i;
 	char	*space;
@@ -91,23 +98,14 @@ static char	*space_create(char *ret, fl_t *unit)
 	return (space);
 }
 
-int	ft_putxx(fl_t *unit, unsigned int n)
+int	ft_putxx(t_fl *unit, unsigned int n)
 {
 	char	*to_print;
 	char	*space;
 	char	*ret;
 	int		ret_nbr;
 
-	if (n == 0 && unit->dot == 0)
-	{
-		to_print = malloc(2);
-		if (to_print == 0)
-			return (-1);
-		to_print[0] = '0';
-		to_print[1] = 0;
-	}	
-	else
-		to_print = str_nbr_create(n);
+	to_print = str_nbr_create(n, unit);
 	if (to_print == 0)
 		return (-1);
 	to_print = str_zero_space_sign_add(to_print, unit, n);
@@ -119,9 +117,6 @@ int	ft_putxx(fl_t *unit, unsigned int n)
 		ret = ft_strjoin(to_print, space);
 	else
 		ret = ft_strjoin(space, to_print);
-	free(to_print);
-	free(space);
 	ret_nbr = write(1, ret, ft_strlen(ret));
-	free(ret);
-	return (ret_nbr);
+	return (free(to_print), free(space), free(ret), ret_nbr);
 }

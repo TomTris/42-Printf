@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:23:00 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 12:33:17 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 12:51:29 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*str_nbr_create(unsigned long n)
 	return (ret);
 }
 
-static char	*str_zero_space_sign_add(char *ret, fl_t *unit, unsigned long n)
+static char	*str_zero_space_sign_add(char *ret, t_fl *unit, unsigned long n)
 {
 	char	*temp;
 
@@ -64,7 +64,7 @@ static char	*str_zero_space_sign_add(char *ret, fl_t *unit, unsigned long n)
 	return (ret);
 }
 
-static char	*space_create(char *ret, fl_t *unit)
+static char	*space_create(char *ret, t_fl *unit)
 {
 	int		i;
 	char	*space;
@@ -86,7 +86,7 @@ static char	*space_create(char *ret, fl_t *unit)
 	return (space);
 }
 
-int	ft_putp(fl_t *unit, unsigned long n)
+int	ft_putp(t_fl *unit, unsigned long n)
 {
 	char	*to_print;
 	char	*space;

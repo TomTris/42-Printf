@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:23:31 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 12:49:57 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 13:27:14 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_printf3(char *str, int *char_skip, va_list args)
 {
-	fl_t	unit;
+	t_fl	unit;
 
 	unit_init(&unit);
 	if (ft_is_man(str) == 0)
@@ -74,9 +74,9 @@ int	ft_printf(const char *str_o, ...)
 
 // int	main(void)
 // {
-	// char *a = "";
+// 	// char *a = "";
 
-	// printf("{%d}\n", printf("%i", 0));
-	// printf("{%d}", ft_printf("%i", 0));
-	// printf("% d\n", 0);
+// 	printf("{%d}\n", printf("%-2.c", '0'));
+// 	printf("{%d}\n", ft_printf("%-2.c", '0'));
+// 	// printf("% d\n", 0);
 // }

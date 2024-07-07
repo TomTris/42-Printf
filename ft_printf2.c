@@ -6,13 +6,13 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:33:24 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 12:49:11 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 13:27:21 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_cmp(char *str, fl_t *unit, va_list args)
+int	ft_cmp(char *str, t_fl *unit, va_list args)
 {
 	if (*str == '%')
 		return (ft_putc(unit, '%'));
@@ -34,12 +34,12 @@ int	ft_cmp(char *str, fl_t *unit, va_list args)
 		return (-1);
 }
 
-int	ft_exec(char *str, fl_t *unit, va_list args)
+int	ft_exec(char *str, t_fl *unit, va_list args)
 {
 	return (ft_cmp(str, unit, args));
 }
 
-int	dot_nbr_def(char *str, fl_t *unit)
+int	dot_nbr_def(char *str, t_fl *unit)
 {
 	int		i;
 	char	*dot_nbr;
@@ -58,31 +58,40 @@ int	dot_nbr_def(char *str, fl_t *unit)
 	return (1);
 }
 
-int	ft_decide(char *str, fl_t *unit, int *char_skip, va_list args)
+int	ft_decide2(char **str, t_fl *unit, int *char_skip)
+{
+	int	i;
+
+	while (**str == '#' || **str == '+' || **str == '-')
+	{
+		if (**str == '#')
+			unit->prefix = 1;
+		if (**str == '+')
+			unit->plus = 1;
+		if (**str == '-')
+			unit->minus = 1;
+		(*char_skip)++;
+		(*str)++;
+	}
+	if (dot_search((*str)) == 1)
+	{
+		i = 0;
+		if (wid_def((*str), unit) == -1)
+			return (-1);
+		while ((*str)[i] != '.')
+			i++;
+		(*char_skip) += i + 1;
+		(*str) += i + 1;
+	}	
+	return (1);
+}
+
+int	ft_decide(char *str, t_fl *unit, int *char_skip, va_list args)
 {
 	int		i;
 
-	while (*str == '#' || *str == '+' || *str == '-')
-	{
-		if (*str == '#')
-			unit->prefix = 1;
-		if (*str == '+')
-			unit->plus = 1;
-		if (*str == '-')
-			unit->minus = 1;
-		(*char_skip)++;
-		str++;
-	}
-	if (dot_search(str) == 1)
-	{
-		i = 0;
-		if (wid_def(str, unit) == -1)
-			return (-1);
-		while (str[i] != '.')
-			i++;
-		(*char_skip) += i + 1;
-		str += i + 1;
-	}
+	if (ft_decide2(&str, unit, char_skip) == -1)
+		return (-1);
 	if (ft_is_man(str) != 1)
 	{
 		i = 0;

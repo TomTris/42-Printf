@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:35:22 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 12:46:24 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 13:26:46 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	dot_search(char *str)
 	return (0);
 }
 
-int	wid_def(char *str, fl_t *unit)
+int	wid_def(char *str, t_fl *unit)
 {
 	int		i;
 	char	*width;
@@ -62,7 +62,7 @@ int	wid_def(char *str, fl_t *unit)
 	return (1);
 }
 
-void	unit_init(fl_t *new_unit)
+void	unit_init(t_fl *new_unit)
 {
 	new_unit->minus = 0;
 	new_unit->width = 0;

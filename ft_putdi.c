@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:34:47 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 12:38:33 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 12:59:24 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*str_nbr_create(int n, char *ret, char *temp)
 	return (ret);
 }
 
-static char	*str_zero_space_sign_add(char *ret, fl_t *unit, int n)
+static char	*str_zero_space_sign_add(char *ret, t_fl *unit, int n)
 {
 	char	*temp;
 	int		cnt;
@@ -68,7 +68,7 @@ static char	*str_zero_space_sign_add(char *ret, fl_t *unit, int n)
 	return (ret);
 }
 
-static char	*space_create(char *ret, fl_t *unit)
+static char	*space_create(char *ret, t_fl *unit)
 {
 	int		i;
 	char	*space;
@@ -90,7 +90,7 @@ static char	*space_create(char *ret, fl_t *unit)
 	return (space);
 }
 
-int	ft_putdi(fl_t *unit, int n)
+int	ft_putdi(t_fl *unit, int n)
 {
 	char	*to_print;
 	char	*space;
@@ -103,7 +103,7 @@ int	ft_putdi(fl_t *unit, int n)
 			return (-1);
 		to_print[0] = '0';
 		to_print[1] = 0;
-	}	
+	}
 	else
 		to_print = str_nbr_create(n, 0, 0);
 	if (to_print == 0)
