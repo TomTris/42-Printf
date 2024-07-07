@@ -6,45 +6,122 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 19:03:37 by qdo               #+#    #+#             */
-/*   Updated: 2024/03/14 15:04:57 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 12:48:30 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_n(int n)
+static int	ft_n(unsigned int n)
 {
-	if (n >= 0 && n <= 9)
+	if (n <= 9)
 		return (n + '0');
-	return (n - 10 + 'A');
+	return (n + 'A'  - 10);
 }
 
-static int	ft_writexx(unsigned int n, int cnt)
+static char	*str_nbr_create(unsigned int n)
 {
-	char	a;
+	char	*ret;
+	char	*temp;
 
-	if (cnt == -1)
-		return (-1);
-	if (n >= 16)
-		cnt = ft_writexx(n / 16, cnt + 1);
-	if (cnt < 0)
-		return (-1);
-	n = n % 16;
-	a = ft_n(n);
-	if (write(1, &a, 1) < 0)
-		return (-1);
-	return (cnt);
+	ret = malloc(1);
+	if (ret == 0)
+		return (NULL);
+	ret[0] = 0;
+	while (n != 0)
+	{
+		temp = ret;
+		ret = ft_strjoin_char_before(ret, ft_n(n % 16));
+		free(temp);
+		if (ret == 0)
+			return (NULL);
+		n = n / 16;
+	}
+	return (ret);
 }
 
-int	ft_putxx(unsigned int n)
+static char	*str_zero_space_sign_add(char *ret, fl_t *unit, unsigned int n)
 {
-	int	cnt;
+	char	*temp;
+	int		cnt;
 
-	cnt = 0;
-	return (ft_writexx(n, cnt + 1));
+	(void) n;
+	cnt = (int) ft_strlen(ret);
+	while (cnt++ < unit->dot_nbr)
+	{
+		temp = ret;
+		ret = ft_strjoin_char_before(ret, '0');
+		free(temp);
+		if (ret == 0)
+			return (NULL);
+	}
+	if (unit->prefix == 1)
+	{
+		temp = ret;
+		ret = ft_strjoin_char_before(ret, 'x');
+		free(temp);
+		if (ret == 0)
+			return (ret);
+		temp = ret;
+		ret = ft_strjoin_char_before(ret, '0');
+		free(temp);
+	}
+	return (ret);
 }
 
-// int	main(void)
-// {
-// 	printf("\n%x\n", 245645656);
-// }
+static char	*space_create(char *ret, fl_t *unit)
+{
+	int		i;
+	char	*space;
+	char	*temp;
+
+	i = (int) ft_strlen(ret);
+	space = malloc(1);
+	if (space == 0)
+		return (free(ret), NULL);
+	space[0] = 0;
+	while (i++ < unit->width)
+	{
+		temp = space;
+		space = ft_strjoin_char_before(space, ' ');
+		free(temp);
+		if (space == 0)
+			return (free(ret), NULL);
+	}
+	return (space);
+}
+
+int	ft_putxx(fl_t *unit, unsigned int n)
+{
+	char	*to_print;
+	char	*space;
+	char	*ret;
+	int		ret_nbr;
+
+	if (n == 0 && unit->dot == 0)
+	{
+		to_print = malloc(2);
+		if (to_print == 0)
+			return (-1);
+		to_print[0] = '0';
+		to_print[1] = 0;
+	}	
+	else
+		to_print = str_nbr_create(n);
+	if (to_print == 0)
+		return (-1);
+	to_print = str_zero_space_sign_add(to_print, unit, n);
+	if (to_print != 0)
+		space = space_create(to_print, unit);
+	if (to_print == 0 || space == 0)
+		return (free(to_print), -1);
+	if (unit->minus == 1)
+		ret = ft_strjoin(to_print, space);
+	else
+		ret = ft_strjoin(space, to_print);
+	free(to_print);
+	free(space);
+	ret_nbr = write(1, ret, ft_strlen(ret));
+	free(ret);
+	return (ret_nbr);
+}

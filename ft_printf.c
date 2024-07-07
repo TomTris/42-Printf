@@ -6,15 +6,15 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:23:31 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 11:47:54 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 12:49:57 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_printf3(char *str, int *char_skip, va_list args)
+int	ft_printf3(char *str, int *char_skip, va_list args)
 {
-	fl_t unit;
+	fl_t	unit;
 
 	unit_init(&unit);
 	if (ft_is_man(str) == 0)
@@ -32,6 +32,7 @@ int ft_printf3(char *str, int *char_skip, va_list args)
 int	ft_printf2(char *str, int cnt, va_list args)
 {
 	int	char_skip;
+	int	check;
 
 	while (*str)
 	{
@@ -45,10 +46,11 @@ int	ft_printf2(char *str, int cnt, va_list args)
 		if (*str == '%')
 		{
 			str++;
-			cnt++;
 			char_skip = 0;
-			if (ft_printf3(str, &char_skip, args) < 0)
+			check = ft_printf3(str, &char_skip, args);
+			if (check < 0)
 				return (-1);
+			cnt += check;
 			str += char_skip;
 			str++;
 		}
@@ -70,10 +72,11 @@ int	ft_printf(const char *str_o, ...)
 	return (cnt);
 }
 
-int	main(void)
-{
-	// ft_printf("%%", 0);
-	char a;
+// int	main(void)
+// {
+	// char *a = "";
 
-	printf("%+p\n", &a);
-}
+	// printf("{%d}\n", printf("%i", 0));
+	// printf("{%d}", ft_printf("%i", 0));
+	// printf("% d\n", 0);
+// }

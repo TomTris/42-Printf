@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:23:00 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 11:48:13 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 12:33:17 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,53 @@
 
 static int	ft_n(unsigned long n)
 {
-	if (n >= 0 && n <= 9)
+	if (n <= 9)
 		return (n + '0');
 	return (n - 10 + 'a');
 }
 
-static char	*str_nbr_create(unsigned int n)
+static char	*str_nbr_create(unsigned long n)
 {
 	char	*ret;
+	char	*temp;
 
+	if (n == 0)
+	{
+		ret = malloc(2);
+		if (ret == 0)
+			return (0);
+		return (ret[0] = '0', ret[1] = 0, ret);
+	}
 	ret = malloc(1);
 	if (ret == 0)
 		return (NULL);
 	ret[0] = 0;
 	while (n != 0)
 	{
+		temp = ret;
 		ret = ft_strjoin_char_before(ret, ft_n(n % 16));
+		free(temp);
 		if (ret == 0)
 			return (NULL);
-		n = n / 10;
+		n = n / 16;
 	}
 	return (ret);
 }
 
-static char	*str_zero_space_sign_add(char *ret, fl_t *unit, unsigned int n)
+static char	*str_zero_space_sign_add(char *ret, fl_t *unit, unsigned long n)
 {
 	char	*temp;
-	int		cnt;
 
+	(void) n;
+	(void) unit;
 	temp = ret;
-	ret = n
+	ret = ft_strjoin_char_before(ret, 'x');
+	free(temp);
+	if (ret == 0)
+		return (ret);
+	temp = ret;
+	ret = ft_strjoin_char_before(ret, '0');
+	free(temp);
 	return (ret);
 }
 
@@ -69,7 +86,7 @@ static char	*space_create(char *ret, fl_t *unit)
 	return (space);
 }
 
-int	ft_putp(fl_t *unit, unsigned int n)
+int	ft_putp(fl_t *unit, unsigned long n)
 {
 	char	*to_print;
 	char	*space;
@@ -89,5 +106,5 @@ int	ft_putp(fl_t *unit, unsigned int n)
 	free(space);
 	ret_nbr = write(1, ret, ft_strlen(ret));
 	free(ret);
-	return (n);
+	return (ret_nbr);
 }

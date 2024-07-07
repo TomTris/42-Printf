@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:56:26 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 11:42:23 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 12:47:33 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static char	*str_nbr_create(unsigned int n)
 {
 	char	*ret;
+	char	*temp;
 
 	ret = malloc(1);
 	if (ret == 0)
@@ -22,7 +23,9 @@ static char	*str_nbr_create(unsigned int n)
 	ret[0] = 0;
 	while (n != 0)
 	{
+		temp = ret;
 		ret = ft_strjoin_char_before(ret, (n % 10) + '0');
+		free(temp);
 		if (ret == 0)
 			return (NULL);
 		n = n / 10;
@@ -35,6 +38,7 @@ static char	*str_zero_space_sign_add(char *ret, fl_t *unit, unsigned int n)
 	char	*temp;
 	int		cnt;
 
+	(void) n;
 	cnt = (int) ft_strlen(ret);
 	while (cnt++ < unit->dot_nbr)
 	{
@@ -84,7 +88,16 @@ int	ft_putu(fl_t *unit, unsigned int n)
 	char	*space;
 	char	*ret;
 
-	to_print = str_nbr_create(n);
+	if (n == 0 && unit->dot == 0)
+	{
+		to_print = malloc(2);
+		if (to_print == 0)
+			return (-1);
+		to_print[0] = '0';
+		to_print[1] = 0;
+	}	
+	else
+		to_print = str_nbr_create(n);
 	if (to_print == 0)
 		return (-1);
 	to_print = str_zero_space_sign_add(to_print, unit, n);

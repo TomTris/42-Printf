@@ -6,16 +6,14 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:34:47 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 11:35:42 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 12:38:33 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char	*str_nbr_create(int n)
+static char	*str_nbr_create(int n, char *ret, char *temp)
 {
-	char	*ret;
-
 	if (n == -2147483648)
 	{
 		ret = malloc(11);
@@ -32,7 +30,9 @@ static char	*str_nbr_create(int n)
 	ret[0] = 0;
 	while (n != 0)
 	{
+		temp = ret;
 		ret = ft_strjoin_char_before(ret, (n % 10) + '0');
+		free(temp);
 		if (ret == 0)
 			return (NULL);
 		n = n / 10;
@@ -96,7 +96,16 @@ int	ft_putdi(fl_t *unit, int n)
 	char	*space;
 	char	*ret;
 
-	to_print = str_nbr_create(n);
+	if (n == 0 && unit->dot == 0)
+	{
+		to_print = malloc(2);
+		if (to_print == 0)
+			return (-1);
+		to_print[0] = '0';
+		to_print[1] = 0;
+	}	
+	else
+		to_print = str_nbr_create(n, 0, 0);
 	if (to_print == 0)
 		return (-1);
 	to_print = str_zero_space_sign_add(to_print, unit, n);
@@ -105,9 +114,6 @@ int	ft_putdi(fl_t *unit, int n)
 		ret = ft_strjoin(to_print, space);
 	else
 		ret = ft_strjoin(space, to_print);
-	free(to_print);
-	free(space);
 	n = write(1, ret, ft_strlen(ret));
-	free(ret);
-	return (n);
+	return (free(to_print), free(space), free(ret), n);
 }

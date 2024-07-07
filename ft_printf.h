@@ -6,16 +6,17 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:15:43 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 10:31:03 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 12:50:41 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
-#include <unistd.h>
-#include <stdarg.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+
+# include <unistd.h>
+# include <stdarg.h>
+# include <string.h>
+# include <stdio.h>
+# include <stdlib.h>
 
 typedef struct fl_s
 {
@@ -26,9 +27,12 @@ typedef struct fl_s
 	int	prefix;
 	int	space;
 	int	plus;
-} fl_t;
+}	fl_t;
 
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
+int		ft_printf(const char *str_o, ...);
+int		ft_printf2(char *str, int cnt, va_list args);
+int		ft_printf3(char *str, int *char_skip, va_list args);
 
 void	unit_init(fl_t *new_unit);
 int		ft_decide(char *str, fl_t *unit, int *char_skip, va_list args);

@@ -6,11 +6,12 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:51:38 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 11:40:29 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 12:19:29 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 
 static int	ft_putstr1_null(void)
 {
@@ -25,14 +26,12 @@ int	ft_puts(fl_t *unit, char *s)
 	int		len;
 	int		len2;
 	int		i;
-	char	*s1;
 
 	(void) unit;
 	if (s == NULL)
 	{
 		return (ft_putstr1_null());
 	}
-	s1 = s;
 	i = 0;
 	len = (int) ft_strlen(s);
 	len2 = len;

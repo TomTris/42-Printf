@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:33:24 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 11:33:23 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 12:49:11 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ int	ft_cmp(char *str, fl_t *unit, va_list args)
 	else if (*str == 'd' || *str == 'i')
 		return (ft_putdi(unit, va_arg(args, int)));
 	else if (*str == 'p')
-		return (-1);
+		return (ft_putp(unit, va_arg(args, unsigned long)));
 	else if (*str == 's')
-		return (-1);
+		return (ft_puts(unit, va_arg(args, char *)));
 	else if (*str == 'u')
-		return (-1);
+		return (ft_putu(unit, va_arg(args, unsigned int)));
 	else if (*str == 'x')
-		return (-1);
+		return (ft_putx(unit, va_arg(args, unsigned int)));
 	else if (*str == 'X')
-		return (-1);
+		return (ft_putxx(unit, va_arg(args, unsigned int)));
 	else
 		return (-1);
 }
