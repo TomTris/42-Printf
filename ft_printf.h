@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:15:43 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 12:52:22 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 14:57:11 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
 
 typedef struct fl_s
 {
@@ -28,6 +29,7 @@ typedef struct fl_s
 	int	prefix;
 	int	space;
 	int	plus;
+	int	flag_0;
 }	t_fl;
 
 int		ft_atoi(const char *str);

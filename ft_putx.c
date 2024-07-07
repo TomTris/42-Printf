@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:56:17 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 13:04:26 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 14:59:06 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,15 @@ int	ft_putx(t_fl *unit, unsigned int n)
 	char	*ret;
 	int		ret_nbr;
 
+	if (n == 0)
+		unit->prefix = 0;
+	if (unit->dot == 0 && unit->flag_0 == 1)
+	{
+		unit->dot = 1;
+		unit->dot_nbr = unit->width;
+		if (unit->plus == 1 || unit->space == 1)
+			unit->dot_nbr -= 1;
+	}
 	to_print = str_nbr_create(n, unit);
 	if (to_print == 0)
 		return (-1);

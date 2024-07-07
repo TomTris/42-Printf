@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 19:23:31 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 13:45:18 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 15:23:38 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,10 @@ int	ft_printf(const char *str_o, ...)
 	return (cnt);
 }
 
+
 int	main(void)
 {
-	// char *a = "";
 
-	// printf("{%d}\n", printf("%-2.c", '0'));
-	// printf("{%d}\n", ft_printf("%-2.c", '0'));
-	ft_printf("%c", '2');
-	// printf("% d\n", 0);
+	printf("{%d}\n", printf("{%c}", 0));
+	printf("{%d}\n", ft_printf("{%c}", 0));
 }

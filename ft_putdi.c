@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:34:47 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 12:59:24 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 14:24:08 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,13 @@ int	ft_putdi(t_fl *unit, int n)
 	char	*space;
 	char	*ret;
 
+	if (unit->dot == 0 && unit->flag_0 == 1)
+	{
+		unit->dot = 1;
+		unit->dot_nbr = unit->width;
+		if (n < 0 || unit->plus == 1 || unit->space == 1)
+			unit->dot_nbr -= 1;
+	}
 	if (n == 0 && unit->dot == 0)
 	{
 		to_print = malloc(2);
@@ -110,6 +117,8 @@ int	ft_putdi(t_fl *unit, int n)
 		return (-1);
 	to_print = str_zero_space_sign_add(to_print, unit, n);
 	space = space_create(to_print, unit);
+	if (space == 0)
+		return (-1);
 	if (unit->minus == 1)
 		ret = ft_strjoin(to_print, space);
 	else

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:33:24 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/07 13:43:45 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/07 14:49:23 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	ft_cmp(char *str, t_fl *unit, va_list args)
 	else if (*str == 'u')
 		return (ft_putu(unit, va_arg(args, unsigned int)));
 	else if (*str == 'x')
-		return (ft_putx(unit, va_arg(args, unsigned int)));
+		return (ft_putx(unit, va_arg(args, unsigned long)));
 	else if (*str == 'X')
-		return (ft_putxx(unit, va_arg(args, unsigned int)));
+		return (ft_putxx(unit, va_arg(args, unsigned long)));
 	else
 		return (-1);
 }
@@ -44,7 +44,6 @@ int	dot_nbr_def(char *str, t_fl *unit)
 	int		i;
 	char	*dot_nbr;
 
-	unit->dot = 1;
 	i = 0;
 	while (ft_is_man(str + i) != 1)
 		i++;
@@ -73,6 +72,14 @@ int	ft_decide2(char **str, t_fl *unit, int *char_skip)
 		(*char_skip)++;
 		(*str)++;
 	}
+	if (**str == '0')
+	{
+		unit->flag_0 = 1;
+		(*char_skip)++;
+		(*str)++;
+	}
+	if (dot_search(*str) == 1)
+		unit->dot = 1;
 	if (ft_is_man(*str) != 1)
 	{
 		i = 0;
@@ -94,7 +101,7 @@ int	ft_decide(char *str, t_fl *unit, int *char_skip, va_list args)
 
 	if (ft_decide2(&str, unit, char_skip) == -1)
 		return (-1);
-	if (ft_is_man(str) != 1)
+	if (unit->dot == 1)
 	{
 		i = 0;
 		if (dot_nbr_def(str, unit) == -1)
