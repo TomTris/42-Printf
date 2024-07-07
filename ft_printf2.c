@@ -6,40 +6,38 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 20:33:24 by qdo               #+#    #+#             */
-/*   Updated: 2024/07/06 20:42:55 by qdo              ###   ########.fr       */
+/*   Updated: 2024/07/06 21:15:08 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// int	ft_cmp(char *str, va_list args)
-// {
-// 	if (*str == '%')
-// 		return (ft_putc('%'));
-// 	else if (*str == 'c')
-// 		return (ft_putc(va_arg(args, int)));
-// 	else if (*str == 'p')
-// 		return (ft_putp(va_arg(args, unsigned long)));
-// 	else if (*str == 's')
-// 		return (ft_puts(va_arg(args, char *)));
-// 	else if (*str == 'd' || *str == 'i')
-// 		return (ft_putdi(va_arg(args, int)));
-// 	else if (*str == 'u')
-// 		return (ft_putu(va_arg(args, unsigned int)));
-// 	else if (*str == 'x')
-// 		return (ft_putx(va_arg(args, unsigned int)));
-// 	else if (*str == 'X')
-// 		return (ft_putxx(va_arg(args, unsigned int)));
-// 	else
-// 		return (-1);
-// }
+int	ft_cmp(char *str, fl_t *unit, va_list args)
+{
+	printf("{%c}\n", *str);
+	if (*str == '%')
+		return (ft_putc(unit, '%'));
+	else if (*str == 'c')
+		return (ft_putc(unit, va_arg(args, int)));
+	// else if (*str == 'p')
+	// 	return (ft_putp(unit, va_arg(args, unsigned long)));
+	// else if (*str == 's')
+	// 	return (ft_puts(unit, va_arg(args, char *)));
+	// else if (*str == 'd' || *str == 'i')
+	// 	return (ft_putdi(unit, va_arg(args, int)));
+	// else if (*str == 'u')
+	// 	return (ft_putu(unit, va_arg(args, unsigned int)));
+	// else if (*str == 'x')
+	// 	return (ft_putx(unit, va_arg(args, unsigned int)));
+	// else if (*str == 'X')
+	// 	return (ft_putxx(unit, va_arg(args, unsigned int)));
+	// else
+		return (-1);
+}
 
 int	ft_exec(char *str, fl_t *unit, va_list args)
 {
-	(void) str;
-	(void) args;
-	(void) unit;
-	return (1);
+	return (ft_cmp(str, unit, args));
 }
 
 int	dot_nbr_def(char *str, fl_t *unit)
