@@ -1,2 +1,2 @@
-This is new version of 42-Printf with bonus part.
-Score: 125/125
+- Score: 125/125
+- we code function print again with some features.
